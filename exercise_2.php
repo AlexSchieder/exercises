@@ -7,26 +7,29 @@
   <body>
     <?
 
-//$sentence = "Here is a quick cheat sheet of the main PHP regex functions.";
 
 function countWords($str) {
   $str_1 = strtolower($str);
-  $str_new = preg_replace('/[.,;:\-!\s]/', '', $str_1);
+  $str_new = preg_replace('/[.,;:\-!]/', '', $str_1);
   $words = explode(" ", $str_new);
   //print_r($words);
 
   return array_count_values($words);
-
 }
 
-$array = countWords($str);
-//countWords($sentence);
 
+  $array = countWords($_GET['text']);
 
   if(isset($_GET['submit'])) {
-    //echo $_GET['text'];
+    echo $_GET['text'];
     countWords($_GET['text']);
+    //print_r(countWords($_GET['text']));
+    //$array = countWords($_GET['text']);
+    //print_r($array);
+
   }
+
+
 
 ?>
   <form action="<?$_SERVER['PHP_SELF']?>" method="get">
