@@ -15,28 +15,31 @@ of an array.*/
 $sentence = "Here is a quick cheat sheet of the main PHP regex functions.";
 
 function countWords($str) {
-  $str_new = strtolower($str);
+  $str_1 = strtolower($str);
+  $str_new = preg_replace('/[.,;:- !]/', '', $str_1);
   $words = explode(" ", $str_new);
-  //words: [0] => hello [1] => world!
-  print_r($words);
+  //print_r($words);
 
-
-  $words_len = count($words);
-
- for($i = 0; $i < $words_len; $i++) {
-    $counted[] = substr_count($str_new, $words[$i]);
-
-  }
-  print_r($counted);
-//problem: words that occur in other words (i.e. "is")
-//problem: characters like . , ;
-//words that occure more times: stristr
-
-//statt dessen foreach verwenden
-// https://www.php.net/manual/en/function.array-combine.php
-  $cw = array_combine($counted, $words);
-
-  print_r($cw);
+  $new = array_count_values($words);
+  print_r($new);
 
 }
 countWords($sentence);
+
+/*
+in the same file, write a form consisting of a single text field and a submit button.
+The "action" attribute to the form sjould be the same page that the form is on
+(don't hard code, use $_SERVER['PHP_SELF']). The form should send the contents of
+text field via GET.
+
+Upon submitting the form, you should be redirected to the same page, but the URL
+should contain the string from the text field as a GET request normally behaves.
+
+Side note: Prevent security vulnerabilies with $_SERVER['PHP_SELF'].
+*/
+
+/* CHeck for the existence of a GET request. If a GET request exists with the name of the
+input field that you made before, run the contents of the request through your
+countWords($str) function. Take the output array of the function, and display an HTML
+table of words and the number of times they occur. Make the table sorted by decreasing
+number of occurences.*/
